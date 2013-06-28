@@ -1,0 +1,16 @@
+########################################
+Arduino Room Security
+
+by Zachary Pratt Gibbs
+
+This is a complete modular room security system based on the arduino.
+The program is interfaced through a serial connection with the arduino
+and two python daemons are ran. These python daemons make a communication
+possible via XMPP to whatever device you would like to control your Room security.
+One is for the communication from XMPP to the arduino and the other from the
+arduino to XMPP.
+
+The final implementation will contain a configuration script that will take in an xml
+file and parse it for the configuration. This file will also build and upload
+the arduino sketch in order for the full configuration to be available via the xml file.
+
