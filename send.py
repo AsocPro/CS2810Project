@@ -4,6 +4,21 @@ import xmpp, serial, time
 
 arduino = serial.Serial('/dev/ttyACM0',115200, timeout=1)
 arduino.open() 
+
+def respond(dta):
+    if dta == "Light On":
+        msg = "Light On"
+        send = True
+    elif dta =="Light Off":
+        msg = "Light Off"
+        send = True
+    else:
+        msg = dta
+        send = False
+    messageSent = xmpp.Message("asocpro@gmail.com", msg)
+    messageSent.setAttr('type', 'chat')
+    if send:
+        connection.send(messageSent)
  
 user="zpgibbs@gmail.com"
 password=raw_input("Enter the password: ")
@@ -16,7 +31,7 @@ result = connection.auth(jid.getNode(), password, "LFY-client")
  
 connection.sendInitPresence() 
 
-arduino.write("x")
+arduino.write("1")
 try:
 
    while True: 
@@ -27,14 +42,3 @@ try:
 except KeyboardInterrupt:
         arduino.close()
 
-def respond(string data):
-    string msg
-    if data == "":
-        msg = ""
-    elif data =="":
-        msg = ""
-    else:
-        msg = "Unknown Query"
-    messageSent = xmpp.Message("asocpro@gmail.com", msg)
-    messageSent.setAttr('type', 'chat')
-    connection.send(messageSent)
